@@ -357,8 +357,15 @@ public:
 	{
 		gameState=RUNNING;
 		selfCollision=true;
-		gridDimensions=vec2i(40,15);
+		gridDimensions=vec2i(180,80);
+
 		windowDimensions=gridDimensions*10;
+		if(windowDimensions.x>=1250||windowDimensions.y>=1000)
+		{
+			windowDimensions.x=1250;
+			windowDimensions.y=(static_cast<float>(windowDimensions.x)/gridDimensions.x)*gridDimensions.y;
+		}
+
 		SetSize(windowDimensions.x,windowDimensions.y);
 		updateInterval=50;
 		game=new GameField(gridDimensions.x,gridDimensions.y);
@@ -418,14 +425,14 @@ public:
 		
 		if(gameState==PAUSED)
 		{
-			glRasterPos2d(windowDimensions.x/2,windowDimensions.y/2);
 			unsigned char pauseStr[16]="Paused";
+			glRasterPos2d(windowDimensions.x/2-glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, pauseStr)/2,windowDimensions.y/2);
 			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, pauseStr);
 		}
 		else if(gameState == FINISHED)
 		{
-			glRasterPos2d(windowDimensions.x/2,windowDimensions.y/2);
 			unsigned char gostr[16]="Game Over";
+			glRasterPos2d(windowDimensions.x/2-glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, gostr)/2,windowDimensions.y/2);
 			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, gostr);
 		}		
 	}
