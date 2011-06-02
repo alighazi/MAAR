@@ -48,7 +48,7 @@ private:
 	static GLubyte colors[4][3];
 public:
 	enum Content{Empty=0, Kerm=1, Fruit=2, Wall=3};
-	static float width, height;
+	static vec2f dimensions;
 	Content content;
 	KermCell *kerm;
 	GameCell()
@@ -118,10 +118,10 @@ public:
 	//calculates the rectangle dedicated to this cell based on the gamefield size
 	RECTf GetRect(int x, int y)
 	{
-		return RECTf(GameCell::width*x
-					,GameCell::height*(y+1)	
-					,GameCell::width*(x+1)							
-					,GameCell::height*y);
+		return RECTf(GameCell::dimensions.x*x
+					,GameCell::dimensions.y*(y+1)	
+					,GameCell::dimensions.x*(x+1)							
+					,GameCell::dimensions.y*y);
 	}
 
 	inline GameCell* GetCell(int x,int y)
@@ -134,7 +134,7 @@ public:
 	{
 		//Draw background
 		glColor3ubv(GameCell::GetContentColor(GameCell::Empty));
-		glRectf(0,0,WIDTH*GameCell::width,HEIGHT*GameCell::height);
+		glRectf(0,0,WIDTH*GameCell::dimensions.x,HEIGHT*GameCell::dimensions.y);
 		
 		for(int i=0;i<HEIGHT;i++)
 		{
@@ -145,6 +145,7 @@ public:
 					GameCell *c=GetCell(j,i);
 					glColor3ubv(c->GetColor());
 					RECTf r=GetRect(j,i);
+					glutWireSphere(1,32,32);
 					glRectf(r.left,r.bottom,r.right,r.top);
 				}
 			}
@@ -162,8 +163,7 @@ public:
 	}
 };
 
-float GameCell::height;
-float GameCell::width;
+vec2f GameCell::dimensions;
 GLubyte GameCell::colors[4][3]={{32,32,32},{255,255,0},{255,0,255},{100,20,0}};
 
 
@@ -286,7 +286,7 @@ public:
 				y=0;
 			if(y<0)
 				y=field->HEIGHT-1;
-			if(x<=0)
+			if(x<0)
 				x=field->WIDTH-1;
 			if(x==field->WIDTH)
 				x=0;
@@ -319,7 +319,9 @@ class KermGame
 private:
 	static KermGame *_instance;
 	int _lastPressedKey;
+	vec2i gridDimensions;
 public:
+	static vec2i windowDimensions;
 	int updateInterval;
 	GameField *game;
 	Kerm *kerm;
@@ -327,15 +329,21 @@ public:
 	inline void SetLastPressedKey(int key){_lastPressedKey=key;}
 	KermGame()
 	{
-		GameCell::height=0.062f;
-		GameCell::width=0.062f;
-		updateInterval=100;
-		game=new GameField(40,30);
+		gridDimensions=vec2i(40,30);
+		SetSize(windowDimensions.x,windowDimensions.y);
+		updateInterval=50;
+		game=new GameField(gridDimensions.x,gridDimensions.y);
 		kerm=new Kerm(40, 20,15, game);
 		GameCell::SetContentColor(GameCell::Empty, 50,60,70);
 		GameCell::SetContentColor(GameCell::Kerm, 0xff,0,0);
 		GameCell::SetContentColor(GameCell::Fruit, 0x20,0xff,0);
 		GameCell::SetContentColor(GameCell::Wall, 0x50,0x20,0x20);
+	}
+	void SetSize(int width, int height)
+	{
+		KermGame::windowDimensions=vec2i(width, height);
+		GameCell::dimensions=vec2f(KermGame::windowDimensions.x/gridDimensions.x,KermGame::windowDimensions.y/gridDimensions.y);
+		
 	}
 	void Update(float dts)
 	{
@@ -368,5 +376,5 @@ public:
 	}
 };
 
-
+vec2i KermGame::windowDimensions=vec2i(800, 600);
 KermGame *KermGame::_instance=new KermGame();

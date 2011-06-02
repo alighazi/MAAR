@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <gl/Glee.h>
 //#define FREEGLUT_STATIC
-#include <gl/glut.h>
+#include <gl/freeglut.h>
 #include <cassert>
 #include <string>
 #include "resource.h"
@@ -15,16 +15,18 @@ static const int QUIT_VALUE( 99 );
 
 FILE *err;
 
+float zretract;
+
 static void display()
 {
     glClear( GL_COLOR_BUFFER_BIT );
 
     // Modeling transform, move geometry 4 units back in Z.
-    glLoadIdentity();
-    glTranslatef( 0.f, 0.f, -4.f );
-
 	glLoadIdentity();
-    glTranslatef( -2.42f, -1.85f, -4.1f );
+
+	//float width= KermGame::GetInstance()->game->WIDTH * GameCell::width;
+	//float height= KermGame::GetInstance()->game->HEIGHT * GameCell::height;
+	//glTranslatef(-width, -height, -zretract );
 
 	KermGame::GetInstance()->Draw();
 
@@ -38,11 +40,13 @@ static void reshape( int w, int h )
 {
     // Update the viewport to draw to the full window
     glViewport( 0, 0, w, h );
-
+	KermGame::GetInstance()->SetSize(w,h);
     // Update the projection matrix / aspect ratio
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    gluPerspective( 50., (double)w/(double)h, 1., 10. );
+	glOrtho(0,KermGame::windowDimensions.x,0,KermGame::windowDimensions.y,-1,1);
+
+    //gluPerspective( 50., (double)w/(double)h, 1., 10. );
 
     // Leave us in model-view mode for our display routine
     glMatrixMode( GL_MODELVIEW );
@@ -55,7 +59,7 @@ static void reshape( int w, int h )
 static void mainMenuCB( int value )
 {
     if (value == QUIT_VALUE)
-        exit( 0 );
+        glutLeaveMainLoop();
 }
 static void timer_exp(int value)
 {
@@ -68,6 +72,10 @@ static void timer_exp(int value)
 static void SpecialKey(int key, int x, int y)
 {
 	KermGame::GetInstance()->SetLastPressedKey(key);
+	if(key==GLUT_KEY_PAGE_DOWN)
+		zretract-=0.02;
+	if(key==GLUT_KEY_PAGE_UP)
+		zretract+=0.02;
 }
 
 static void init()
@@ -84,18 +92,19 @@ static void init()
     // Create a right-mouse menu to allow users to exit.
     int mainMenu = glutCreateMenu( mainMenuCB );
     glutAddMenuEntry( "Quit", QUIT_VALUE );
-    glutAttachMenu( GLUT_RIGHT_BUTTON );
+    glutAttachMenu( GLUT_RIGHT_BUTTON );	
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine, int nShowCmd)
 {
+	zretract=4;
 	int argc;
 	LPWSTR *argv= CommandLineToArgvW(GetCommandLine(),&argc);
 
 	glutInit(&argc,(char **)(argv));
 
 	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize( 800, 600 );
+	glutInitWindowSize( KermGame::windowDimensions.x, KermGame::windowDimensions.y );
 	glutCreateWindow( "" );
 
 	glutDisplayFunc(display);

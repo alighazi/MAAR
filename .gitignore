@@ -1,0 +1,15 @@
+*.pdb
+*.obj
+*.ilk
+*.exe
+*.htm
+*.ncb
+*.suo
+*.user
+*.dep
+*.idb
+*.res
+*.manifest
+*.manifest.res
+*/Release
+*/Debug
