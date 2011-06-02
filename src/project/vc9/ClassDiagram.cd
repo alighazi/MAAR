@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Game" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAgAAABAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KermCell" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAABAAAEAABgAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameCell" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQIgAAAAAAgAgAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityBase" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameField" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAKAAAAAAgAgAAAAAAAAACAAUAAAgAAAAAAABAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kerm" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAGCAAAgAAAAIQBAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KermGame" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAABAAAAgAgEAAMBAAABAAAAAAIAIAgAAABAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MAAR::vec2&lt;T&gt;" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAIAAgBAAAAAAABgAAYRgAAIAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\vector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MAAR::vec3&lt;T&gt;" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAIAAgBAAAAAAABgAAYRhAQIAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\vector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MAAR::vec4&lt;T&gt;" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAIAAgBAAAAAAABgAAaxhAQIAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\vector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="polarVector3" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIACAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="RECTf" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAgAAAAgAAAAIAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="vec2f" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="vec3f" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="vec4f" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="vec2i" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="vec3i" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="vec4i" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\helpers.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="Direction" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAACEAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameState" Collapsed="true">
+    <Position X="2.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\CPP\MAAR\src\src\kerm.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

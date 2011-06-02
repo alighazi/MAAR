@@ -19,6 +19,31 @@ enum Direction
 	DIR_Down,
 	DIR_Right
 };
+enum GameState
+{
+	RUNNING=0,
+	PAUSED,
+	FINISHED
+};
+
+class Game
+{
+private:
+protected:
+	static Game* _instance;
+	GameState gameState;
+	bool selfCollision;
+public:
+	inline bool IsSelfCollisionEnable(){return selfCollision;}
+	inline GameState GetGameState(){return gameState;}
+	void SetGameState(GameState state){gameState=state;}
+	static Game* GetInstance()
+	{
+		return _instance;
+	}
+
+};
+
 class KermCell
 {
 	public:
@@ -166,7 +191,6 @@ public:
 vec2f GameCell::dimensions;
 GLubyte GameCell::colors[4][3]={{32,32,32},{255,255,0},{255,0,255},{100,20,0}};
 
-
 class Kerm
 {
 private:
@@ -203,12 +227,6 @@ public:
 		return kerm[i];
 	}
 	
-	void ResetCells()
-	{		
-		for(int i=0; i<MAX_LENGHT; i++)
-			field->GetCell(kerm[i].x, kerm[i].y)->content=GameCell::Empty;
-	}
-
 	/*
 	Kerm:    =OOOk
 	indexes: 43210
@@ -220,7 +238,6 @@ public:
 		bool lengthMaxed=false;
 		bool ateFruit=false;
 		int tailIndex;
-		ResetCells();
 		for(int i=MAX_LENGHT-1; i>=0; i--)
 		{
 			KermCell &cell=kerm[i];			
@@ -291,16 +308,26 @@ public:
 			if(x==field->WIDTH)
 				x=0;
 
-			
-			if(cell.type==KermCell::Head && field->GetCell(x,y)->content==GameCell::Fruit && !lengthMaxed)
+			if(cell.type==KermCell::Head)
 			{
-				ateFruit=true;
-				Length++;
-				kerm[tailIndex+1]=kerm[tailIndex];
-				kerm[tailIndex].type=KermCell::Body;
-				field->GetCell(rand()%field->WIDTH,rand()%field->HEIGHT)->content=GameCell::Fruit;
-				MessageBeep(MB_ICONEXCLAMATION);
+				//self collision!
+				if(Game::GetInstance()->IsSelfCollisionEnable() && field->GetCell(x,y)->content==GameCell::Kerm)
+				{
+					Game::GetInstance()->SetGameState(FINISHED);
+					MessageBeep(MB_ICONERROR);
+				}
+
+				if(field->GetCell(x,y)->content==GameCell::Fruit && !lengthMaxed)
+				{
+					ateFruit=true;
+					Length++;
+					kerm[tailIndex+1]=kerm[tailIndex];
+					kerm[tailIndex].type=KermCell::Body;
+					field->GetCell(rand()%field->WIDTH,rand()%field->HEIGHT)->content=GameCell::Fruit;
+					MessageBeep(MB_ICONEXCLAMATION);
+				}
 			}
+
 
 
 			field->GetCell(x,y)->content=GameCell::Kerm;
@@ -314,10 +341,9 @@ public:
 
 
 
-class KermGame
+class KermGame :public Game
 {
 private:
-	static KermGame *_instance;
 	int _lastPressedKey;
 	vec2i gridDimensions;
 public:
@@ -325,15 +351,18 @@ public:
 	int updateInterval;
 	GameField *game;
 	Kerm *kerm;
-	inline static KermGame* GetInstance(){return _instance;}
+	inline static KermGame* GetInstance(){return (KermGame*) _instance;}
 	inline void SetLastPressedKey(int key){_lastPressedKey=key;}
 	KermGame()
 	{
-		gridDimensions=vec2i(40,30);
+		gameState=RUNNING;
+		selfCollision=true;
+		gridDimensions=vec2i(40,15);
+		windowDimensions=gridDimensions*10;
 		SetSize(windowDimensions.x,windowDimensions.y);
 		updateInterval=50;
 		game=new GameField(gridDimensions.x,gridDimensions.y);
-		kerm=new Kerm(40, 20,15, game);
+		kerm=new Kerm(40, gridDimensions.x/2,gridDimensions.y/2, game);
 		GameCell::SetContentColor(GameCell::Empty, 50,60,70);
 		GameCell::SetContentColor(GameCell::Kerm, 0xff,0,0);
 		GameCell::SetContentColor(GameCell::Fruit, 0x20,0xff,0);
@@ -342,11 +371,29 @@ public:
 	void SetSize(int width, int height)
 	{
 		KermGame::windowDimensions=vec2i(width, height);
-		GameCell::dimensions=vec2f(KermGame::windowDimensions.x/gridDimensions.x,KermGame::windowDimensions.y/gridDimensions.y);
+		GameCell::dimensions=vec2f(static_cast<float>(KermGame::windowDimensions.x)/gridDimensions.x,
+			static_cast<float>(KermGame::windowDimensions.y)/gridDimensions.y);
 		
 	}
 	void Update(float dts)
 	{
+		if(gameState==FINISHED)
+			return;
+
+		switch(_lastPressedKey)
+		{
+		case GLUT_KEY_END:
+			if(gameState==RUNNING)
+				SetGameState(PAUSED);
+			break;
+		case GLUT_KEY_HOME:
+			if(gameState==PAUSED)
+				SetGameState(RUNNING);
+		}
+
+		if(gameState==PAUSED)
+			return;
+
 		Direction dir=DIR_Right;
 		switch(_lastPressedKey)
 		{
@@ -368,6 +415,19 @@ public:
 	void Draw()
 	{
 		game->Draw();
+		
+		if(gameState==PAUSED)
+		{
+			glRasterPos2d(windowDimensions.x/2,windowDimensions.y/2);
+			unsigned char pauseStr[16]="Paused";
+			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, pauseStr);
+		}
+		else if(gameState == FINISHED)
+		{
+			glRasterPos2d(windowDimensions.x/2,windowDimensions.y/2);
+			unsigned char gostr[16]="Game Over";
+			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, gostr);
+		}		
 	}
 	~KermGame()
 	{
@@ -376,5 +436,5 @@ public:
 	}
 };
 
-vec2i KermGame::windowDimensions=vec2i(800, 600);
-KermGame *KermGame::_instance=new KermGame();
+vec2i KermGame::windowDimensions;
+Game *Game::_instance=new KermGame();

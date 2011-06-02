@@ -217,6 +217,10 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath=".\ClassDiagram.cd"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\README"
 			>
 		</File>
