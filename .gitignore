@@ -9,7 +9,14 @@
 *.dep
 *.idb
 *.res
+*.log
+*.tlog
+*.rc
 *.manifest
 *.manifest.res
-*/Release
-*/Debug
+*.lastbuildstate
+*.sdf
+bin/Release
+bin/Debug
+src/project/*/Debug
+src/project/*/Release
