@@ -1,7 +1,4 @@
-//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by gl.rc
-//
+
 #define GLUT_ICON                       1
 
 // Next default values for new objects

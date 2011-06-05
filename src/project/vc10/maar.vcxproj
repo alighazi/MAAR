@@ -89,12 +89,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\m.cpp" />
+    <ClCompile Include="..\..\src\GameCell.cpp" />
+    <ClCompile Include="..\..\src\GameField.cpp" />
+    <ClCompile Include="..\..\src\Mar.cpp" />
+    <ClCompile Include="..\..\src\MaarCell.cpp" />
+    <ClCompile Include="..\..\src\MaarGame.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\helpers.hpp" />
-    <ClInclude Include="..\..\src\kerm.h" />
+    <ClInclude Include="..\..\src\helpers.h" />
+    <ClInclude Include="..\..\src\Mar.h" />
     <ClInclude Include="..\..\src\resource.h" />
     <ClInclude Include="..\..\src\vector.h" />
+    <ClInclude Include="..\..\src\EntityBase.h" />
+    <ClInclude Include="..\..\src\Game.h" />
+    <ClInclude Include="..\..\src\GameCell.h" />
+    <ClInclude Include="..\..\src\GameField.h" />
+    <ClInclude Include="..\..\src\MaarCell.h" />
+    <ClInclude Include="..\..\src\MaarGame.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\res\glut.ico" />
