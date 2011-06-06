@@ -55,10 +55,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\..\lib\sdl\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glee.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\CPP\MAAR\src\lib\glut;D:\CPP\MAAR\src\lib\glee;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glee.lib;freeglut.lib;sdl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib\glee\;..\..\lib\glut\;..\..\lib\sdl\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
@@ -96,8 +97,10 @@
     <ClCompile Include="..\..\src\MaarGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\lib\sdl\include\SDL.h" />
     <ClInclude Include="..\..\src\helpers.h" />
     <ClInclude Include="..\..\src\Mar.h" />
+    <ClInclude Include="..\..\src\Matrix.h" />
     <ClInclude Include="..\..\src\resource.h" />
     <ClInclude Include="..\..\src\vector.h" />
     <ClInclude Include="..\..\src\EntityBase.h" />

@@ -16,6 +16,8 @@
 *.manifest.res
 *.lastbuildstate
 *.sdf
+*.opensdf
+*.ipch
 bin/Release
 bin/Debug
 src/project/*/Debug
