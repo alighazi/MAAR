@@ -1,5 +1,4 @@
 #include "MAR.h"
-#include <Windows.h>
 
 namespace MAAR
 {
@@ -105,7 +104,6 @@ namespace MAAR
 				{
 					Game::GetInstance()->SetGameState(FINISHED);
 					//TODO: Replace with a cross platform sound playing function
-					MessageBeep(MB_ICONERROR);
 				}
 
 				if(field->GetCell(x,y)->content==GameCell::Fruit && !lengthMaxed)
@@ -116,7 +114,6 @@ namespace MAAR
 					maar[tailIndex].type=MaarCell::Body;
 					field->GetCell(rand()%field->WIDTH,rand()%field->HEIGHT)->content=GameCell::Fruit;
 					//TODO: Replace with a cross platform sound playing function
-					MessageBeep(MB_ICONEXCLAMATION);
 				}
 			}
 

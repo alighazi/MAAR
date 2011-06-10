@@ -11,7 +11,7 @@ private:
 	int _lastPressedKey;
 	vec2i gridDimensions;
 public:
-	static vec2i windowDimensions;
+	vec2i windowDimensions;
 	int updateInterval;
 	GameField *game;
 	Mar *mar;

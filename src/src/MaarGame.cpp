@@ -1,7 +1,7 @@
 #include "MaarGame.h"
 #include "GameCell.h"
 #include "GameField.h"
-#include <gl/freeglut.h>
+#include "SDL_keysym.h"
 
 namespace MAAR
 {
@@ -43,11 +43,11 @@ namespace MAAR
 
 		switch(_lastPressedKey)
 		{
-		case GLUT_KEY_END:
+		case SDLK_END:
 			if(gameState==RUNNING)
 				SetGameState(PAUSED);
 			break;
-		case GLUT_KEY_HOME:
+		case SDLK_HOME:
 			if(gameState==PAUSED)
 				SetGameState(RUNNING);
 		}
@@ -58,16 +58,16 @@ namespace MAAR
 		Direction dir=DIR_Right;
 		switch(_lastPressedKey)
 		{
-		case GLUT_KEY_LEFT:
+		case SDLK_LEFT:
 			dir=DIR_Left;
 			break;
-		case GLUT_KEY_RIGHT:
+		case SDLK_RIGHT:
 			dir=DIR_Right;
 			break;
-		case GLUT_KEY_UP:
+		case SDLK_UP:
 			dir=DIR_Up;
 			break;
-		case GLUT_KEY_DOWN:
+		case SDLK_DOWN:
 			dir=DIR_Down;
 			break;
 		}
@@ -80,15 +80,12 @@ namespace MAAR
 		if(gameState==PAUSED)
 		{
 			unsigned char pauseStr[16]="Paused";
-			glRasterPos2d(windowDimensions.x/2-glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, pauseStr)/2,windowDimensions.y/2);
-			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, pauseStr);
+//TODO: Find a font/text rendering solution to display Paused in the center of screen 
 		}
 		else if(gameState == FINISHED)
 		{
 			unsigned char gostr[16]="Game Over";
-			glRasterPos2d(windowDimensions.x/2-glutBitmapLength(GLUT_BITMAP_TIMES_ROMAN_24, gostr)/2,windowDimensions.y/2);
-			glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, gostr);
-
+//TODO: Find a font/text rendering solution to display Game Over in the center of screen 
 		}
 	}
 	MaarGame::~MaarGame()
@@ -97,5 +94,4 @@ namespace MAAR
 		delete mar;
 	}
 	Game *Game::_instance=new MaarGame();
-	vec2i MaarGame::windowDimensions;
 }
